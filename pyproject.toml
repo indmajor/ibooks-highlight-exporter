@@ -1,0 +1,2 @@
+[tool.black]
+exclude = '/(\.eggs|\.git|\.hg|\.nox|\.tox|\.venv|_build|buck-out|build|dist|venv)/'
