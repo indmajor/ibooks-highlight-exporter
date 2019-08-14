@@ -3,9 +3,8 @@ from typing import Type, TypeVar, List
 import sys
 import sqlite3
 
-import epub
-import helpers
-from base import TextPointer
+from ibooks_highlight_exporter import epub, helpers
+from ibooks_highlight_exporter.base import TextPointer
 
 B = TypeVar("B", bound="Book")
 A = TypeVar("A", bound="Annotation")
@@ -43,7 +42,6 @@ class Book:
         for row in cursor.execute(select_query):
 
             import os
-            import epub
 
             epub_path = row[3]
             epub_content_path = epub.get_epub_content_path(epub_path)

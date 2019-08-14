@@ -1,0 +1,13 @@
+setup.py
+ibooks_highlight_exporter/__init__.py
+ibooks_highlight_exporter/base.py
+ibooks_highlight_exporter/epub.py
+ibooks_highlight_exporter/exporter.py
+ibooks_highlight_exporter/helpers.py
+ibooks_highlight_exporter/main.py
+ibooks_highlight_exporter/models.py
+ibooks_highlight_exporter.egg-info/PKG-INFO
+ibooks_highlight_exporter.egg-info/SOURCES.txt
+ibooks_highlight_exporter.egg-info/dependency_links.txt
+ibooks_highlight_exporter.egg-info/entry_points.txt
+ibooks_highlight_exporter.egg-info/top_level.txt

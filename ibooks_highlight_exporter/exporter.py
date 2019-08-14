@@ -2,9 +2,7 @@ from collections import OrderedDict
 from typing import List
 from xml.etree import ElementTree as ET
 
-import base
-import epub
-import models
+from ibooks_highlight_exporter import epub, models, base
 
 
 def get_books_available_for_export() -> List[models.Book]:

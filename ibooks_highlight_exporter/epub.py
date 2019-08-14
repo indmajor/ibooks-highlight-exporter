@@ -4,8 +4,8 @@ from collections import OrderedDict
 
 from lxml import etree
 
-from helpers import find_first_file_with_extension
-from base import HeadingPointer
+from ibooks_highlight_exporter.helpers import find_first_file_with_extension
+from ibooks_highlight_exporter.base import HeadingPointer
 
 
 def get_epub_content_path(epub_directory_path: str) -> str:

@@ -1,6 +1,6 @@
 import click
 
-import exporter
+from ibooks_highlight_exporter import exporter
 
 
 @click.command()

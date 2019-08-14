@@ -1,2 +1,19 @@
+[tool.poetry]
+name = "ibooks_highlight_exporter"
+version = "0.1.1"
+description = "Export highlights from your iBooks to HTML including chapter titles"
+authors = ["Olga Andreeva <indmajor64@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "*"
+Click = "^7.0"
+lxml = "^4.4"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.4"
+
+[tool.poetry.scripts]
+ibooks_higlight_exporter = 'ibooks_highlight_exporter:main.export'
+
 [tool.black]
 exclude = '/(\.eggs|\.git|\.hg|\.nox|\.tox|\.venv|_build|buck-out|build|dist|venv)/'

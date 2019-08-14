@@ -1,4 +1,5 @@
 venv/
+dist/
 __pycache__/
 *.html
 *.swp
