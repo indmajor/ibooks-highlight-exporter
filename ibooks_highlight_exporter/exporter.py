@@ -31,6 +31,10 @@ def export(book: models.Book):
                     tag = f"h{text.heading_level + 1}"
                 el = ET.Element(tag)
                 el.text = text.text
+                if hasattr(text, "note") and text.note is not None:
+                    note_element = ET.Element("em")
+                    note_element.text = f" – {text.note}"
+                    el.append(note_element)
                 body.append(el)
 
     ET.ElementTree(html).write(f"{book.title}_highlights.html")

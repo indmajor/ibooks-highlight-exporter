@@ -63,6 +63,10 @@ class Book:
 
 
 class Annotation(TextPointer):
+    def __init__(self, text_part, position, text, note=None):
+        self.note = note
+        super().__init__(text_part, position, text)
+
     def __repr__(self):
         return f"{self.text[:50]} from {self.text_part} at {self.position}"
 
@@ -79,7 +83,7 @@ class Annotation(TextPointer):
         annotations = []
 
         select_query = f"""
-        select ZANNOTATIONSELECTEDTEXT, ZANNOTATIONLOCATION
+        select ZANNOTATIONSELECTEDTEXT, ZANNOTATIONLOCATION, ZANNOTATIONNOTE
         from ZAEANNOTATION
         where ZANNOTATIONASSETID = '{book.asset_id}' and ZANNOTATIONSELECTEDTEXT is not null
         ORDER BY Z_PK
@@ -93,6 +97,6 @@ class Annotation(TextPointer):
             except ValueError:
                 continue
             annotations.append(
-                Annotation(text=row[0], text_part=parts[page_id], position=position)
+                Annotation(text=row[0], text_part=parts[page_id], position=position, note=row[2])
             )
         return annotations
