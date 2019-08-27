@@ -30,7 +30,16 @@ def export(book: models.Book):
                 if isinstance(text, base.HeadingPointer):
                     tag = f"h{text.heading_level + 1}"
                 el = ET.Element(tag)
-                el.text = text.text
+                first_line = True
+                for line in text.text.splitlines():
+                    if first_line:
+                        el.text = line
+                        el.tail = None
+                    else:
+                        br = ET.SubElement(el, 'br')
+                        br.tail = line
+                    first_line = False
+
                 if hasattr(text, "note") and text.note is not None:
                     note_element = ET.Element("em")
                     note_element.text = f" – {text.note}"
