@@ -1,7 +1,7 @@
-from typing import Type, TypeVar, List
-
-import sys
 import sqlite3
+import sys
+from glob import glob
+from typing import Type, TypeVar, List
 
 from ibooks_highlight_exporter import epub, helpers
 from ibooks_highlight_exporter.base import TextPointer
@@ -40,22 +40,19 @@ class Book:
         """
 
         for row in cursor.execute(select_query):
-
-            import os
-
             epub_path = row[3]
             epub_content_path = epub.get_epub_content_path(epub_path)
             epub_toc_path = epub.get_epub_toc_path(epub_path)
 
             if epub_content_path is None and epub_toc_path is None:
-                # try old format
-                old_format_epub_path = os.path.join(row[3], "OEBPS")
-                try:
-                    epub_content_path = epub.get_epub_content_path(old_format_epub_path)
-                    epub_toc_path = epub.get_epub_toc_path(old_format_epub_path)
-                    epub_path = old_format_epub_path
-                except FileNotFoundError:
-                    pass
+                # try sub-folders
+                for path in glob(f"{epub_path}/*/"):
+                    try:
+                        epub_content_path = epub.get_epub_content_path(path)
+                        epub_toc_path = epub.get_epub_toc_path(path)
+                        epub_path = path
+                    except FileNotFoundError:
+                        pass
 
             if epub_content_path and epub_toc_path is not None:
                 books.append(Book(row[0], row[1], row[2], epub_path))
