@@ -40,22 +40,23 @@ class Book:
         """
 
         for row in cursor.execute(select_query):
-            epub_path = row[3]
-            epub_content_path = epub.get_epub_content_path(epub_path)
-            epub_toc_path = epub.get_epub_toc_path(epub_path)
+            book_path = row[3]
+            if book_path.endswith(".epub"):
+                epub_content_path = epub.get_epub_content_path(book_path)
+                epub_toc_path = epub.get_epub_toc_path(book_path)
 
-            if epub_content_path is None and epub_toc_path is None:
-                # try sub-folders
-                for path in glob(f"{epub_path}/*/"):
-                    try:
-                        epub_content_path = epub.get_epub_content_path(path)
-                        epub_toc_path = epub.get_epub_toc_path(path)
-                        epub_path = path
-                    except FileNotFoundError:
-                        pass
+                if epub_content_path is None and epub_toc_path is None:
+                    # try sub-folders
+                    for path in glob(f"{book_path}/*/"):
+                        try:
+                            epub_content_path = epub.get_epub_content_path(path)
+                            epub_toc_path = epub.get_epub_toc_path(path)
+                            book_path = path
+                        except FileNotFoundError:
+                            pass
 
-            if epub_content_path and epub_toc_path is not None:
-                books.append(Book(row[0], row[1], row[2], epub_path))
+                if epub_content_path and epub_toc_path is not None:
+                    books.append(Book(row[0], row[1], row[2], book_path))
         return books
 
 
