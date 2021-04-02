@@ -28,14 +28,14 @@ def get_parts(epub_directory_path: str) -> OrderedDict:
 
 
 def parse_epub_cfi(epub_cfi: str) -> (str, int):
-    regex = re.compile(r"epubcfi\(/6/\d+\[(.+)\]!/4/(\d+)")
+    regex = re.compile(r"epubcfi\(/6/\d+\[(.+)\]!/4(.*?)/(\d+)")
     m = regex.search(epub_cfi)
     if m is None:
         raise ValueError("Invalid epubcfi!")
     else:
         part_id = m.group(1)
         try:
-            position = int(m.group(2))
+            position = int(m.group(3))
         except ValueError:
             raise ValueError("Invalid epubcfi!")
         return part_id, position
