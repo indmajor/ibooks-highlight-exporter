@@ -83,7 +83,7 @@ class Annotation(TextPointer):
         select_query = f"""
         select ZANNOTATIONSELECTEDTEXT, ZANNOTATIONLOCATION, ZANNOTATIONNOTE
         from ZAEANNOTATION
-        where ZANNOTATIONASSETID = '{book.asset_id}' and ZANNOTATIONSELECTEDTEXT is not null
+        where ZANNOTATIONASSETID = '{book.asset_id}' and ZANNOTATIONSELECTEDTEXT is not null and ZANNOTATIONDELETED = 0
         ORDER BY Z_PK
         """
 
